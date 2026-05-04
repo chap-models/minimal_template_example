@@ -1,17 +1,23 @@
 import argparse
 import joblib
 import pandas as pd
+from sklearn.metrics import root_mean_squared_error
 
 
 def predict(model_fn: str, historic_data: str, future_data: str, out_file: str):
-    # chap eval supplies a future CSV without `disease_cases` (the target isn't
-    # known yet), so we can't read y_val from it. The previous version computed
-    # an RMSE return value that was never captured by chap eval anyway.
     df = pd.read_csv(future_data)
     X = df[['rainfall', 'mean_temperature']]
     model = joblib.load(model_fn)
-    df['sample_0'] = model.predict(X)
+    y_pred = model.predict(X)
+    df['sample_0'] = y_pred
     df.to_csv(out_file, index=False)
+    # When the future CSV carries the target (HPO mode via isolated_hpo_run.py
+    # against a labelled validation/test split), return -RMSE so the HPO loop
+    # can rank candidates. chap eval's future CSV has no target column - return
+    # None in that case so the prediction call still succeeds.
+    if 'disease_cases' in df.columns:
+        return -root_mean_squared_error(df['disease_cases'], y_pred)
+    return None
 
 
 if __name__ == "__main__":
