@@ -11,7 +11,10 @@ def train(dataset_path: str, model_path: str, model_configuration: dict[str, any
     X = df[features]
     Y = df['disease_cases']
     Y = Y.fillna(0)  # set NaNs to zero (not a good solution, just for the example to work)
-    alpha = float(model_configuration["user_option_values"]["alpha"]) # TODO: skip validation for "user_options" in yaml/dic
+    # chap eval writes an empty {} model_configuration_for_run.yaml when no
+    # user_options are passed. Fall back to sklearn's Ridge default so the
+    # model still runs in that case.
+    alpha = float(model_configuration.get("user_option_values", {}).get("alpha", 1.0))
     model = Ridge(alpha=alpha)
     model.fit(X, Y)
     print("Train - coefficients: ", list(zip(features, model.coef_)))
