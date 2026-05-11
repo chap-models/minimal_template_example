@@ -43,5 +43,5 @@ A pyenv.yaml should be included in the model directory to specify the python ver
 
 After you have installed chap-core (see here for installation instructions: https://github.com/dhis2-chap/chap-core), you can run this minimal template through CHAP as follows (remember to replace '/path/to/your/model/directory' and '/path/to/your/config/yaml/file' with your local path):
 ```bash
-chap evaluate-hpo --model-name /path/to/your/model/directory --dataset-name hydromet_5_filtered --model-configuration-yaml /path/to/your/config/yaml/file --report-filename report.pdf --ignore-environment  --debug
+chap eval --model-name /path/to/your/model/directory --dataset-csv https://raw.githubusercontent.com/dhis2/climate-health-data/refs/heads/main/lao/chap_LAO_admin1_monthly.csv --output-file eval.nc --plot --model-configuration-yaml /path/to/your/config/yaml/file --run-config.ignore-environment --run-config.debug
 ```
