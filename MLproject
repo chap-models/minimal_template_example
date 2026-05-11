@@ -1,5 +1,8 @@
 name: min_template_py_ex
 
+meta_data:
+  display_name: Minimal Template Python Example
+
 hpo_search_space:
   alpha: 
     values: [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3] 
