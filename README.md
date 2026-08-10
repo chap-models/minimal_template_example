@@ -7,13 +7,13 @@ Before getting a new model to work as part of CHAP, it can be useful to develop 
 The example can be run in isolation (e.g. from the command line) without hpo using the file isolated_run.py:
 
 ```bash
-python isolated_run.py
+uv run isolated_run.py
 ```
 This file imitates how data is parsed in chap and sends the formated configuration data (from a file configuration.yaml) to "train", which trains a tuned model from an input file "train.csv" and stores the trained model in a file "model.bin". Then a call to "predict" uses the stored model to forecast future disease cases (to a file "predictions.csv") based on input data on future climate predictions (from a file test.csv). Note: The "historic_data" argument to predict can be any placeholder since it's never used by the linear model.     
 
 The example can be run in isolation with hpo activated using the file isolated_hpo_run.py:
 ```bash 
-python isolated_hpo_run.py
+uv run isolated_hpo_run.py
 ```
 This file imitates how the hpo loop is done in chap. Here we send a list of configrations (from a file configuration_hpo.yaml) to "train" and in each loop one configration is picked. The tuned model is trained from an input file "train.csv" and evaluated on "validation.csv", and after the loop the model with the best rmse score is saved in the file "model.bin". Then a call to "predict" uses the stored model to forecast future disease cases (to a file "predictions.csv") based on input data on future climate predictions (from a file test.csv).
 
@@ -37,9 +37,9 @@ entry_points:
       future_data: str
       out_file: str
       model_config: str
-python_env: pyenv.yaml
+uv_env: pyproject.toml
 ```
-A pyenv.yaml should be included in the model directory to specify the python version and dependencies.
+A pyproject.toml should be included in the model directory to specify the python version and dependencies. CHAP runs the entry point commands through `uv run`, which resolves and installs the environment on first use.
 
 After you have installed chap-core (see here for installation instructions: https://github.com/dhis2-chap/chap-core), you can run this minimal template through CHAP as follows (remember to replace '/path/to/your/model/directory' and '/path/to/your/config/yaml/file' with your local path):
 ```bash
