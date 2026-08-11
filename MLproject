@@ -9,7 +9,7 @@ required_covariates:
 
 hpo_search_space:
   alpha: 
-    values: [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3] 
+    values: [1e-5, 1e-4]
 
 entry_points:
   train:
