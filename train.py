@@ -14,7 +14,8 @@ def train(dataset_path: str, model_path: str, model_configuration: dict[str, any
     # chap eval writes an empty {} model_configuration_for_run.yaml when no
     # user_options are passed. Fall back to sklearn's Ridge default so the
     # model still runs in that case.
-    alpha = float(model_configuration.get("user_option_values", {}).get("alpha", 1.0))
+    print(model_configuration.get("user_option_values", {}).get("alpha", 1.0))
+    alpha = float(model_configuration.get("user_option_values", {}).get("alpha", {}).get("values", 1.0))
     model = Ridge(alpha=alpha)
     model.fit(X, Y)
     print("Train - coefficients: ", list(zip(features, model.coef_)))

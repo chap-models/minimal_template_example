@@ -7,6 +7,11 @@ allow_free_additional_continuous_covariates: true
 required_covariates:
   - rainfall
 
+user_options:
+  alpha:
+    type: float
+    default: 1e-5
+
 hpo_search_space:
   alpha: 
     values: [1e-5, 1e-4]
