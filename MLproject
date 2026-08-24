@@ -9,8 +9,8 @@ required_covariates:
 
 user_options:
   alpha:
-    type: float
-    default: 1e-5
+    type: number
+    default: 1.0
 
 hpo_search_space:
   alpha: 
