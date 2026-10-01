@@ -3,7 +3,7 @@ from train import train
 import yaml
 
 
-config = yaml.safe_load(open("config_hpo.yaml"))
+config = yaml.safe_load(open("search_space.yaml"))
 best_score = -float("inf")
 best_model = None
 for alpha in config["alpha"]["values"]:

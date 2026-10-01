@@ -6,6 +6,7 @@ meta_data:
 allow_free_additional_continuous_covariates: true
 required_covariates:
   - rainfall
+  - mean_temperature
 
 user_options:
   alpha:
