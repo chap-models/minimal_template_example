@@ -2,6 +2,8 @@ name: min_template_py_ex
 
 meta_data:
   display_name: Minimal Template Python Example
+  description: "A minimal example of a CHAP-compatible forecasting model template. Ridge regressor with tunable hyperparameter alpha"
+  author: "Lilu Zhan"
 
 allow_free_additional_continuous_covariates: true
 required_covariates:
